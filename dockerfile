@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:16
 
 WORKDIR /app
 
@@ -14,7 +14,10 @@ RUN apk add --no-cache \
     libxext \
     libxrender \
     libxfixes \
-    glib
+    glib\
+    binutils \
+    musl \
+    linux-headers
 
 RUN npm install
 
