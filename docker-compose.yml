@@ -7,7 +7,7 @@ services:
     environment:
       NODE_ENV: "production"
     networks:
-      - my_networks
+      - my_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.convertissor_backend.rule=host(`api.convertisseur.mia-services.fr`)"
