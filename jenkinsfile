@@ -38,7 +38,7 @@ pipeline{
         } 
 
         stage('build ima and push it to the registry'){
-            
+
             steps{
                  script{
                 docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
@@ -61,7 +61,7 @@ pipeline{
              
             steps{
                 script{
-                    '''
+                sh    '''
                     docker stop  convertissor_backend_container || true
                     docker rm convertissor_backend_container || true
                     docker-compose -f docker-compose.yml pull
@@ -72,6 +72,9 @@ pipeline{
             }
 
         }
+
+
+        
 
 
         stage('Supresion des images inutiles') {
