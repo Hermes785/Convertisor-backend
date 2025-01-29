@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:20-bullseye  
 
 WORKDIR /app
 
@@ -6,18 +6,15 @@ COPY .env ./
 
 COPY package*.json ./
 
-RUN apk add --no-cache \
-    gcompat \
-    libc6-compat \
-    libstdc++ \
-    libx11 \
-    libxext \
-    libxrender \
-    libxfixes \
-    glib\
-    binutils \
-    musl \
-    linux-headers
+RUN apt update && apt install -y \
+    libc6 \
+    libstdc++6 \
+    libx11-6 \
+    libxext6 \
+    libxrender1 \
+    libxfixes3 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN npm install
 
