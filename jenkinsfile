@@ -57,12 +57,15 @@ pipeline{
         }
 
         stage('Deploy to production environment'){
+               when {
+                expression { env.BRANCH_NAME == 'main' }
+            }
             steps{
                 script{
                     '''
                     docker stop  convertissor_backend_container || true
                     docker rm convertissor_backend_container || true
-                    docker=compose -f convertissor_backend_container pull
+                    docker=compose -f docker-compose.yml pull
                     docker-compose -f docker-compose.yml up -d
                     
                     '''
