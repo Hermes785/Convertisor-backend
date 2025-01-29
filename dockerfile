@@ -6,15 +6,6 @@ COPY .env ./
 
 COPY package*.json ./
 
-RUN apk add --no-cache \
-    gcompat \
-    libc6-compat \
-    libstdc++ \
-    libx11 \
-    libxext \
-    libxrender \
-    libxfixes \
-    glib 
 
 RUN npm install
 
