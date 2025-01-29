@@ -88,3 +88,8 @@ module.exports.convertPdfToDocxs = async (req, res) => {
         });
     }
 };
+
+module.exports.tes = (req, res) => {
+    return res.status(200).json("nothing")
+
+}
