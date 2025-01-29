@@ -13,7 +13,7 @@ pipeline{
     stages{
         stage('checkout code'){
             steps{
-                checlout scm
+               checkout scm
             }
         }
         stage('install dependencies'){
