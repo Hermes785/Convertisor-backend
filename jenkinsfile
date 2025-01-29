@@ -26,7 +26,7 @@ pipeline{
             steps{
                 script{
                     sh ''' 
-                     if [ -f .env.]; then
+                     if [ -f .env]; then
                             rm -f .env
                         fi
 
@@ -65,7 +65,7 @@ pipeline{
                     '''
                     docker stop  convertissor_backend_container || true
                     docker rm convertissor_backend_container || true
-                    docker=compose -f docker-compose.yml pull
+                    docker-compose -f docker-compose.yml pull
                     docker-compose -f docker-compose.yml up -d
                     
                     '''
