@@ -38,6 +38,7 @@ pipeline{
         } 
 
         stage('build ima and push it to the registry'){
+            
             steps{
                  script{
                 docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
@@ -57,9 +58,7 @@ pipeline{
         }
 
         stage('Deploy to production environment'){
-               when {
-                expression { env.BRANCH_NAME == 'main' }
-            }
+             
             steps{
                 script{
                     '''
