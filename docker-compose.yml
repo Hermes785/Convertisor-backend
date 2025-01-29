@@ -10,7 +10,7 @@ services:
       - my_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.convertissor_backend.rule=host(`api.convertisseur.mia-services.fr`)"
+      - "traefik.http.routers.convertissor_backend.rule=host(`convertisseur-api.mia-services.fr`)"
       - "traefik.http.routers.convertissor_backend.entrypoints=websecure"
       - "traefik.http.services.convertissor_backend.loadbalancer.server.port=5500"
       - "traefik.http.routers.convertissor_backend.tls.certresolver=myresolver"
