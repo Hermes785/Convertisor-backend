@@ -1,7 +1,7 @@
 services:
   convertissor_backend:
     container_name: convertissor_backend_container
-    image: convertissor_backend_image:latest
+    image: hermesn/convertissor_backend:latest
     ports:
       - "5500:5500"
     environment:
