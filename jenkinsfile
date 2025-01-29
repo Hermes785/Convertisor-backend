@@ -62,6 +62,9 @@ pipeline{
             steps{
                 script{
                 sh    '''
+                apt-get update
+                 apt-get install libc6
+
                     docker stop  convertissor_backend_container || true
                     docker rm convertissor_backend_container || true
                     docker-compose -f docker-compose.yml pull
