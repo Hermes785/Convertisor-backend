@@ -14,10 +14,7 @@ RUN apk add --no-cache \
     libxext \
     libxrender \
     libxfixes \
-    glib\
-    binutils \
-    musl \
-    linux-headers
+    glib 
 
 RUN npm install
 
