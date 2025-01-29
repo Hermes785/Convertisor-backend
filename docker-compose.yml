@@ -14,7 +14,6 @@ services:
       - "traefik.http.routers.convertissor_backend.entrypoints=websecure"
       - "traefik.http.services.convertissor_backend.loadbalancer.server.port=5500"
       - "traefik.http.routers.convertissor_backend.tls.certresolver=myresolver"
-    command: ["sh", "-c", " npm run start"]
 
 networks:
   my_network:
