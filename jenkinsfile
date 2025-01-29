@@ -26,12 +26,12 @@ pipeline{
             steps{
                 script{
                     sh ''' 
-                     if [ -f .env]; then
-                            rm -f .env
-                        fi
+                    if [ -f .env ]; then
+                  rm -f .env
+                   fi
+                  touch .env
+                  echo "PDFTRON_LICENSE_KEY=${PDFTRON_LICENSE_KEY}" >> .env
 
-                        touch .env
-                        echo  PDFTRON_LICENSE_KEY = ${PDFTRON_LICENSE_KEY} >> .env
                     '''
                 }
             }
@@ -62,9 +62,6 @@ pipeline{
             steps{
                 script{
                 sh    '''
-                apt-get update
-                 apt-get install libc6
-
                     docker stop  convertissor_backend_container || true
                     docker rm convertissor_backend_container || true
                     docker-compose -f docker-compose.yml pull
