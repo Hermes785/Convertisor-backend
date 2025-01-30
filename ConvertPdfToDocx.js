@@ -43,8 +43,11 @@ module.exports.convertPdfToDocxs = async (req, res) => {
 
             async function main() {
                 // Chemin pour les ressources de PDFTron
-                const structuredOutputPath = path.resolve(
-                    "C:/Project/Convertisor-backend/Lib/Windows/StructuredOutput.exe"
+                const structuredOutputPath = path.join(
+                    __dirname,
+                    "Lib",
+                    "Windows",
+                    "StructuredOutput.exe"
                 );
                 await PDFNet.addResourceSearchPath(structuredOutputPath);
 

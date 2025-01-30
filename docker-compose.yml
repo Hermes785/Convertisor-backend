@@ -2,6 +2,7 @@ services:
   convertissor_backend:
     container_name: convertissor_backend_container
     image: hermesn/convertissor_backend:latest
+    mem_limit: 1G
     ports:
       - "5500:5500"
     environment:
