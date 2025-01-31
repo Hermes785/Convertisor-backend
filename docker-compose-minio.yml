@@ -1,0 +1,30 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ACCESS_KEY=minioaccesskey
+      - MINIO_SECRET_KEY=miniosecretkey
+    ports:
+      - "9020:9000"
+      - "9001:9001"
+    networds: -my_network
+    volumes:
+      - minio_data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.minio.rule=Host(`minio.mia-services.fr`)
+      - traefik.http.routers.minio.entrypoints=websecure
+      - traefik.http.routers.minio.tls.certresolver=myresolver
+      - traefik.http.services.minio_service.loadBalancer.server.port=9000
+      - traefik.http.services.minio.tls.certresolver=letsencrypt
+
+    command: server /data
+    restart: always
+
+volumes:
+  minio_data:
+
+networds:
+  my_network:
+  external: true
