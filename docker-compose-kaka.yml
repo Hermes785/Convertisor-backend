@@ -8,6 +8,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+    networks:
+      - my_network
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -16,6 +18,8 @@ services:
     ports:
       - "9092:9092"
       - "29092:29092"
+    networks:
+      - my_network
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -29,3 +33,7 @@ services:
       - "traefik.http.routers.kafka.entrypoints=websecure"
       - "traefik.http.routers.kafka.tls=true"
       - "traefik.http.services.kafka.loadbalancer.server.port=9092"
+
+networks:
+  my_network:
+    external: true
