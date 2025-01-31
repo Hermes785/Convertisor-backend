@@ -8,7 +8,7 @@ services:
     ports:
       - "9020:9000"
       - "9001:9001"
-    networds: -my_network
+    networks: -my_network
     volumes:
       - minio_data:/data
     labels:
