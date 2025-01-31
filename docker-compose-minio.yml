@@ -5,8 +5,8 @@ services:
     image: minio/minio:latest
     container_name: minio
     environment:
-      - MINIO_ACCESS_KEY=minioaccesskey
-      - MINIO_SECRET_KEY=miniosecretkey
+      - MINIO_ROOT_USER =minioRoot
+      - MINIO_ROOT_PASSWORD=minioPass
     ports:
       - "9020:9000"
       - "9001:9001"
