@@ -19,6 +19,7 @@ services:
       - "traefik.http.routers.minio.rule=Host(`minio.mia-services.fr`)"
       - "traefik.http.routers.minio.entrypoints=websecure"
       - "traefik.http.routers.minio.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.minio.tls.certresolver=myresolver"
       - "traefik.http.services.minio.loadBalancer.server.port=9000"
     command: server /data
     restart: always
