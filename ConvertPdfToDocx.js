@@ -55,7 +55,7 @@ module.exports.convertPdfToDocxs = async (req, res) => {
                 const pdfdoc = await PDFNet.PDFDoc.createFromFilePath(input);
                 await PDFNet.Convert.toWord(pdfdoc, output);
 
-                console.log("Conversion réussie ! Fichier enregistré à :", output);
+                console.log("Conversion réussie ! Fichier enregistré à  :", output);
             }
 
             // Exécuter la conversion avec nettoyage après exécution
