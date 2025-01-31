@@ -25,6 +25,6 @@ services:
 volumes:
   minio_data:
 
-networds:
+networks:
   my_network:
   external: true
