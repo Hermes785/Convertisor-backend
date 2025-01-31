@@ -5,11 +5,11 @@ services:
     image: minio/minio:latest
     container_name: minio
     environment:
-      - MINIO_ROOT_USER =minioRoot
-      - MINIO_ROOT_PASSWORD=minioPass
+      - MINIO_ROOT_USER=minioaccesskey
+      - MINIO_ROOT_PASSWORD=miniosecretkey
     ports:
-      - "9020:9000"
-      - "9001:9001"
+      - "9020:9000" # API MinIO
+      - "9001:9001" # WebUI MinIO
     networks:
       - my_network
     volumes:
@@ -20,7 +20,6 @@ services:
       - "traefik.http.routers.minio.entrypoints=websecure"
       - "traefik.http.routers.minio.tls.certresolver=myresolver"
       - "traefik.http.services.minio.loadBalancer.server.port=9000"
-
     command: server /data
     restart: always
 
