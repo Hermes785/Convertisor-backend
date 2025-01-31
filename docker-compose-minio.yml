@@ -1,3 +1,5 @@
+version: "3.7"
+
 services:
   minio:
     image: minio/minio:latest
@@ -8,7 +10,8 @@ services:
     ports:
       - "9020:9000"
       - "9001:9001"
-    networks: -my_network
+    networks:
+      - my_network
     volumes:
       - minio_data:/data
     labels:
@@ -18,7 +21,6 @@ services:
       - traefik.http.routers.minio.tls.certresolver=myresolver
       - traefik.http.services.minio_service.loadBalancer.server.port=9000
       - traefik.http.services.minio.tls.certresolver=letsencrypt
-
     command: server /data
     restart: always
 
@@ -27,4 +29,4 @@ volumes:
 
 networks:
   my_network:
-  external: true
+    external: true
