@@ -3,6 +3,7 @@ version: "3"
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -28,12 +29,25 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    networks:
+      - my_network
+    environment:
+      KAFKA_CLUSTERS_0_NAME: "Local Kafka"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:9092"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.kafka.rule=Host(`kafka.mia-services.fr`)"
-      - "traefik.http.routers.kafka.entrypoints=websecure"
-      - "traefik.http.routers.kafka.tls=true"
-      - "traefik.http.services.kafka.loadbalancer.server.port=9092"
+      - "traefik.http.routers.kafka-ui.rule=Host(`kafka-ui.mia-services.fr`)"
+      - "traefik.http.routers.kafka-ui.entrypoints=websecure"
+      - "traefik.http.routers.kafka-ui.tls.certresolver=myresolver"
+      - "traefik.http.services.kafka-ui.loadBalancer.server.port=8080"
 
 networks:
   my_network:
