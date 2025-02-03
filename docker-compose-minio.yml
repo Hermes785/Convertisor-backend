@@ -8,22 +8,27 @@ services:
       - MINIO_ROOT_USER=minioaccesskey
       - MINIO_ROOT_PASSWORD=miniosecretkey
     ports:
-      - "9020:9000" # Expose le port API MinIO pour Traefik, non sécurisé
-      - "9001:9001" # Expose le port Web UI
+      - "9020:9000" # API MinIO
+      - "9001:9001" # Web UI MinIO
     networks:
       - my_network
     volumes:
       - minio_data:/data
     labels:
       - "traefik.enable=true"
+
+      # API MinIO
       - "traefik.http.routers.minio.rule=Host(`minio.mia-services.fr`)"
       - "traefik.http.routers.minio.entrypoints=websecure"
       - "traefik.http.routers.minio.tls.certresolver=myresolver"
-      - "traefik.http.services.minio.loadBalancer.server.port=9000"
+      - "traefik.http.services.minio.loadbalancer.server.port=9000"
+
+      # Web UI MinIO
       - "traefik.http.routers.minio-ui.rule=Host(`minio-ui.mia-services.fr`)"
       - "traefik.http.routers.minio-ui.entrypoints=websecure"
       - "traefik.http.routers.minio-ui.tls.certresolver=myresolver"
-      - "traefik.http.services.minio-ui.loadBalancer.server.port=9001"
+      - "traefik.http.services.minio-ui.loadbalancer.server.port=9001"
+
     command: server /data --console-address ":9001"
     restart: always
 
