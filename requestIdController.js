@@ -38,13 +38,9 @@ module.exports.sendRequestIdAfterUpload = async (req, res) => {
         }
 
         const input = path.resolve(req.file.path)// Fichier PDF téléchargé
-        // const sanitizedFilename = req.file.filename
-        //  .normalize("NFD")
-        //  .replace(/[\u0300-\u036f]/g, "")
-        //  .replace(/[^a-zA-Z0-9.\-_]/g, "_"); // Remplace les caractères non valides
-        //   const output = path.resolve(__dirname, "uploads", `${sanitizedFilename}.docx`);
-        /// console.log(`${sanitizedFilename}.docx`)
-        // Fichier Word généré
+        const filename = req.file.filename;
+        console.log(input);
+
 
         // Vérifiez si le fichier PDF téléchargé existe
         if (!fs.existsSync(input)) {
@@ -54,7 +50,7 @@ module.exports.sendRequestIdAfterUpload = async (req, res) => {
             });
         }
         const requestid = generateId()
-        await minioService(requestid, input)
+        await minioService(filename, input)
         return res.status(200).json(requestid)
 
     })

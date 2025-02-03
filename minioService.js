@@ -1,13 +1,13 @@
 const minio = require('minio')
 
-module.exports.minioService = async (requestid, filePAth) => {
+module.exports.minioService = async (filename, filePAth) => {
     // Initialize Minio client
     const minioClient = new minio.Client({
-        endPoint: 'minio.mia-services.fr',
-        port: 9020,
+        endPoint: 'play.min.io',
+        port: 9000,
         useSSL: true,
-        accessKey: 'minioaccesskey',
-        secretKey: 'miniosecretkey'
+        accessKey: 'Q3AM3UQ867SPQQA43P2F',
+        secretKey: 'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG',
     });
     ;
     if (!minioClient) {
@@ -34,13 +34,13 @@ module.exports.minioService = async (requestid, filePAth) => {
         }
     });
     const filePath = filePAth;
-    const objectName = requestid;
+    const objectName = filename;
 
     minioClient.fPutObject(bucketName, objectName, filePath, (err, etag) => {
         if (err) {
             return console.log(err);
         }
-        console.log(`File uploaded successfully. ETag: ${etag}`);
+        console.log(`File uploaded successfully. name: ${objectName}`);
     });
 
 }
