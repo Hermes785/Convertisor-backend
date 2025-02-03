@@ -1,3 +1,5 @@
+version: "3.7"
+
 services:
   minio:
     image: minio/minio:latest
@@ -6,26 +8,19 @@ services:
       - MINIO_ROOT_USER=minioaccesskey
       - MINIO_ROOT_PASSWORD=miniosecretkey
     ports:
-      - "9001:9001" # Web UI MinIO
-      - "9020:9000"
+      - "9020:9000" # API MinIO
+      - "9001:9001" # WebUI MinIO
     networks:
       - my_network
     volumes:
       - minio_data:/data
     labels:
       - "traefik.enable=true"
-
       - "traefik.http.routers.minio.rule=Host(`minio.mia-services.fr`)"
       - "traefik.http.routers.minio.entrypoints=websecure"
       - "traefik.http.routers.minio.tls.certresolver=myresolver"
-      - "traefik.http.services.minio.loadBalancer.server.port=9000"
-
-      - "traefik.http.routers.minio-ui.rule=Host(`minio-ui.mia-services.fr`)" # Web UI sur un sous-domaine
-      - "traefik.http.routers.minio-ui.entrypoints=websecure"
-      - "traefik.http.routers.minio-ui.tls.certresolver=myresolver"
-      - "traefik.http.services.minio-ui.loadBalancer.server.port=9001"
-
-    command: server /data --console-address ":9001"
+      - "traefik.http.services.minio.loadBalancer.server.port=9001"
+    command: server /data  --console-address ":9001"
     restart: always
 
 volumes:
