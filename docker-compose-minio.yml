@@ -17,13 +17,13 @@ services:
     labels:
       - "traefik.enable=true"
 
-      # API MinIO
-      - "traefik.http.routers.minio.rule=Host(`minio.mia-services.fr`)"
-      - "traefik.http.routers.minio.entrypoints=websecure"
-      - "traefik.http.routers.minio.tls.certresolver=myresolver"
-      - "traefik.http.services.minio.loadbalancer.server.port=9000"
+      # API MinIO (nom de service clair et distinct)
+      - "traefik.http.routers.minio-api.rule=Host(`minio.mia-services.fr`)"
+      - "traefik.http.routers.minio-api.entrypoints=websecure"
+      - "traefik.http.routers.minio-api.tls.certresolver=myresolver"
+      - "traefik.http.services.minio-api.loadbalancer.server.port=9000"
 
-      # Web UI MinIO
+      # Web UI MinIO (nom de service clair et distinct)
       - "traefik.http.routers.minio-ui.rule=Host(`minio-ui.mia-services.fr`)"
       - "traefik.http.routers.minio-ui.entrypoints=websecure"
       - "traefik.http.routers.minio-ui.tls.certresolver=myresolver"
