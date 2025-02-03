@@ -4,7 +4,7 @@ module.exports.minioService = async (requestid, filePAth) => {
     // Initialize Minio client
     const minioClient = new minio.Client({
         endPoint: 'minio.mia-services.fr',
-        port: 9000,
+        port: 9020,
         useSSL: true,
         accessKey: 'minioaccesskey',
         secretKey: 'miniosecretkey'
