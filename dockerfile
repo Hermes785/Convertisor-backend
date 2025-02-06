@@ -6,22 +6,10 @@ COPY .env ./
 
 COPY package*.json ./
 
-RUN apk add --no-cache \
-    gcompat \
-    libc6-compat \
-    libstdc++ \
-    libx11 \
-    libxext \
-    libxrender \
-    libxfixes \
-    glib \
-    binutils \
-    musl \
-    linux-headers
 
 RUN npm install
 
-COPY . .
+COPY . . 
 
 EXPOSE 5500
 

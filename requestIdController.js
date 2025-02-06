@@ -1,3 +1,4 @@
+const { kafkaService } = require("./kafkaService");
 const { minioService } = require("./minioService");
 const { uploadFile } = require('./upload');
 const dotenv = require('dotenv').config();
@@ -6,7 +7,7 @@ const path = require('path');
 function containsLettersndCHaracter(result) {
     return /^(?=.*[a-z])(?=.*\d).+$/.test(result);
 }
-const generateId = () => {
+const generateId = async () => {
     let result = ""
     const charactere = '1234567890qwertyuioplkjhgfasdzxcvbnm'
     const charactereLenght = charactere.length
@@ -30,27 +31,26 @@ module.exports.sendRequestIdAfterUpload = async (req, res) => {
             });
         }
 
-        // Vérification si le fichier est bien présent dans la requête
         if (!req.file) {
             return res.status(400).json({
                 message: 'Aucun fichier trouvé dans la requête.'
             });
         }
 
-        const input = path.resolve(req.file.path)// Fichier PDF téléchargé
+        const input = path.resolve(req.file.path)
         const filename = req.file.filename;
         console.log(input);
 
-
-        // Vérifiez si le fichier PDF téléchargé existe
         if (!fs.existsSync(input)) {
             console.error('Le fichier PDF téléchargé est introuvable :', input);
             return res.status(400).json({
                 message: "Le fichier PDF n'a pas été trouvé après téléchargement."
             });
         }
-        const requestid = generateId()
-        await minioService(filename, input)
+        const requestid = await generateId()
+        const minio = await minioService(filename, input)
+        const bucketName = minio.bucketName
+        await kafkaService(requestid, bucketName, filename)
         return res.status(200).json(requestid)
 
     })
