@@ -21,21 +21,7 @@ pipeline{
               sh 'npm install'
           }
         }
-
-        stage('chargment environment variables'){
-            steps{
-                script{
-                    sh ''' 
-                    if [ -f .env ]; then
-                  rm -f .env
-                   fi
-                  touch .env
-                  echo "PDFTRON_LICENSE_KEY=${PDFTRON_LICENSE_KEY}" >> .env
-
-                    '''
-                }
-            }
-        } 
+      
 
         stage('build ima and push it to the registry'){
 

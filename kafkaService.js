@@ -2,7 +2,7 @@ const { Kafka } = require('kafkajs')
 
 const kafkaClient = new Kafka({
     clientId: 'convertor-client',
-    logLevel: 'error',
+    //logLevel: 'error',
     brokers: ['localhost:29092'],
 })
 
