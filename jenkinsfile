@@ -36,7 +36,7 @@ pipeline{
                         sh "docker push ${fullImageName}"
                         sh "docker push docker.io/hermesn/convertissor_backend:latest"
 
-                        echo "Docker image pushed successfully!"
+                         echo "Docker image pushed successfully!"
                     }
             }
             }
