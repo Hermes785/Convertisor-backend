@@ -3,7 +3,7 @@ const { Kafka } = require('kafkajs')
 const kafkaClient = new Kafka({
     clientId: 'convertor-client',
     //logLevel: 'error',
-    brokers: ['localhost:29092'],
+    brokers: ['kafka:9092'],
 })
 
 module.exports.kafkaService = async (requestId, bucketName, filename) => {
