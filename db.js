@@ -3,9 +3,9 @@ const mysql = require('mysql2/promise');
 module.exports.dataBase = async () => {
     try {
         const connection = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
+            host: 'mysql_db_worker',
+            user: 'myuser',
+            password: 'mypassword',
             database: 'file_convert'
         });
         console.log("Connected to the database!");
