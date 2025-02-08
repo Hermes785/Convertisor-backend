@@ -9,6 +9,9 @@ COPY package*.json ./
 
 RUN npm install
 
+RUN npm install @aws-sdk/client-ec2
+
+
 COPY . . 
 
 EXPOSE 5500
